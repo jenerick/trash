@@ -18,13 +18,31 @@ str_to_int ( std::string str )
 int
 main ( int argc, char** argv )
 {
+	bool		arm = true;
 	int		emphasis = 0;
 	std::string	input;
 
+	const char *msg =
+		"trash: version 0.1 alpha\n"
+		"\n"
+		"Usage: trash <input>\n"
+		"  If input is given interactive mode is disabled.\n";
+
+	if ( argc >= 2 ) {
+		input = argv[1];
+	}
+
 	std::cout << "is it garbage, or is it trash?\n";
-	while ( 1 ) {
-		std::cout << "?>";
-		std::cin >> input;
+	while ( arm ) {
+		if ( argc < 2 ) {
+			std::cout << "?>";
+			std::cin >> input;
+		}
+
+		if ( argc >= 2 ) {
+			arm = false;
+		}
+
 		std::cout << '\n' << "synopsis: ";
 		emphasis	= str_to_int(input) % 128;
 
